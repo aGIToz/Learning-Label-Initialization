@@ -73,7 +73,6 @@ class Laplacian(torch.nn.Module):
         laplacian = (scatter(distancesF.view(-1,)*((y[:,graph.edge_index[0]]/torch.sqrt(deg.T[:,graph.edge_index[1]] * deg.T[:,graph.edge_index[0]]))-(y[:,graph.edge_index[1]]/deg.T[:,graph.edge_index[1]])), graph.edge_index[1],dim=1, dim_size=y.shape[1],reduce="add"))
  
         if not self.run_pde:
-            #return self.lamb * laplacian
             return laplacian
         else:
             return self.lamb * laplacian * self.mask
