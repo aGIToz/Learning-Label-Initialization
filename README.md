@@ -12,6 +12,11 @@ Arixv:https://arxiv.org/pdf/2205.01358.pdf
 - To produce the results of the PDE with learned front and weights and inlcuding the new labels (val labels)
 - In progress.
 
+## Dependencies
+Any version of the following libaries should be fine, but the code has been tested for:
+- pytorch==1.8.1
+- torch-geometric==1.7.0
+- torchdiffeq==0.2.2
 
 ## Tasks
 - [x] Add code for harmonic extension with learned front, with and without weights.
