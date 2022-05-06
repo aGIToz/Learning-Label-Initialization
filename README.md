@@ -5,7 +5,7 @@ Arixv:https://arxiv.org/pdf/2205.01358.pdf
 
 ## Instructions
 ### harmonic_ext_learned_front
-- This folder contains the scripts to reproduce the results for the PDE with learned front (\psi_0) and weights (and no weights).
+- This folder contains the scripts to reproduce the results for the PDE with learned front (\psi_0) and weights.
 - Navigate to the folder: `cd harmonic_ext_learned_front`
 - Run it: `python run_cora_.py`, this should produce a `cora.txt` file with test scores over 100 iterations.
 
