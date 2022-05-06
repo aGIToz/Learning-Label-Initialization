@@ -20,5 +20,5 @@ Any version of the following libaries should be fine, but the code has been test
 
 ## Tasks
 - [x] Add code for harmonic extension with learned front, with and without weights.
-- [ ] Write proper instruction to run the code [in progress].
-- [ ] Add code for including the val data after training [in progress].
+- [x] Write proper instruction to reproduce the above item.
+- [ ] Add code and instructions for including the val data after training [in progress].
