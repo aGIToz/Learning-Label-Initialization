@@ -26,4 +26,5 @@ Any version of the following libaries should be fine, but the code has been test
 - [x] Write proper instruction to run the above item.
 - [x] Add the scripts for the PDE with learned front and including the validation labels after the training.
 - [x] Write proper instrcution to run the above item.
+- [ ] Create a flag to run with no weights.
 - [ ] Put an extended version of the paper on arxiv.
