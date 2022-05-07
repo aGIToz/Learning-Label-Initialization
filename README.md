@@ -46,4 +46,4 @@ Any version of the following libaries should be fine, but the code has been test
 - [x] Write proper instrcution to run the above item.
 - [x] Create a flag to run with no weights.
 - [ ] Put an extended version of the paper on arxiv.
-- [ ] Do an extra experiment for ogb-arxiv before conference
+- [ ] Do an extra experiment for ogb-arxiv
