@@ -29,6 +29,7 @@ parser.add_argument("--wd", type=float, default=0.00474882565951743)
 parser.add_argument("--itr", type=int, default=150)
 parser.add_argument("--time", type=float, default=5.0)
 parser.add_argument("--lamb", type=float, default=1.0)
+parser.add_argument("--nowgts", action='store_true')
 args = parser.parse_args()
 
 
@@ -53,13 +54,14 @@ graph = graph.to(dev)
 
 #PDE
 class Laplacian(torch.nn.Module):
-    def __init__(self, mask, lamb):
+    def __init__(self, mask, lamb, nowgts):
         super(Laplacian, self).__init__()
         self.run_pde = None
         self.mask = mask
         self.distances = Linear(1, graph.edge_index.shape[1]-len(graph.x), bias=False,weight_initializer='kaiming_uniform').to(dev) 
         self.rel = Sigmoid()
         self.lamb = lamb
+        self.nowgts = nowgts
 
     def forward(self, t, y):
         distances = self.distances.weight
@@ -68,6 +70,7 @@ class Laplacian(torch.nn.Module):
         distancesF = (distancesT + distances)/2
         distancesF = self.rel(distancesF)
         distancesF = torch.cat([distancesF, dist_fixed],dim=0)
+        if self.nowgts: distancesF = torch.ones_like(distancesF)
 
         deg = scatter(distancesF,graph.edge_index[1], dim=0, dim_size=y.shape[1],reduce="add")
         laplacian = (scatter(distancesF.view(-1,)*((y[:,graph.edge_index[0]]/torch.sqrt(deg.T[:,graph.edge_index[1]] * deg.T[:,graph.edge_index[0]]))-(y[:,graph.edge_index[1]]/deg.T[:,graph.edge_index[1]])), graph.edge_index[1],dim=1, dim_size=y.shape[1],reduce="add"))
@@ -106,7 +109,7 @@ class Net(torch.nn.Module):
         self.front_initial = front_initial
         self.mask = mask
         self.sig = Sigmoid()
-        self.laplaceblock = LaplacianBlock(Laplacian(mask, kwargs["lamb"]), t=time, **dict(rtol=kwargs["rtol"]))
+        self.laplaceblock = LaplacianBlock(Laplacian(mask, kwargs["lamb"], kwargs["nowgts"]), t=time, **dict(rtol=kwargs["rtol"]))
 
     def forward(self,x):
         x = self.m1(x)
@@ -127,7 +130,7 @@ class Net(torch.nn.Module):
 t = (torch.linspace(0,args.time,2)).to(dev)
 front_initial = get_front(graph.y, graph.train_mask)
 maskF = torch.where(torch.sum(front_initial.T,dim=1)==1, False, True)
-model = Net(maskF, front_initial, t, **dict(lamb=args.lamb, inp=graph.x.shape[1],out=(graph.y.max()+1).item(),rtol=args.rtol, alpha1=args.alpha1, alpha2=args.alpha2)).to(dev)
+model = Net(maskF, front_initial, t, **dict(nowgts=args.nowgts, lamb=args.lamb, inp=graph.x.shape[1],out=(graph.y.max()+1).item(),rtol=args.rtol, alpha1=args.alpha1, alpha2=args.alpha2)).to(dev)
 opt = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd) #try
 Loss = torch.nn.CrossEntropyLoss() # try
 
