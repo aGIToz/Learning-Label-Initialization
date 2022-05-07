@@ -6,13 +6,31 @@ Arixv:https://arxiv.org/pdf/2205.01358.pdf
 ## Instructions
 ### harmonic_ext_learned_front
 - This folder contains the scripts to reproduce the results for the PDE with learned front (\psi_0) and weights.
-- Navigate to the folder: `cd harmonic_ext_learned_front`
-- Run it: `python run_cora_.py`, this should produce a `cora.txt` file with test scores over 100 iterations.
+- Navigate to the folder: 
+```
+cd harmonic_ext_learned_front
+```
+- For learning front and weigths, run: 
+```
+python run_cora_.py
+```
+- For learning only the front, run:
+```
+python run_cora_.py --nowgts
+```
+- The above commands should produce a `cora.txt` file with test scores over 100 iterations.
 
 ### harmonic_ext_include_val
 - This folder contains the scripts to reproduce the results for the PDE with learned front and including the validation labels after the training.
-- Navigate to the folder: `cd harmonic_ext_include_val`
-- Run it: `python run_cora_.py`, this should produce a `cora.txt` file with test scores over 100 iterations.
+- Navigate to the folder: 
+```
+cd harmonic_ext_include_val
+```
+- Run it: `
+```
+python run_cora_.py
+```
+- This should produce a `cora.txt` file with test scores over 100 iterations.
 - You should see no variations for the citation graphs as the split is fixed.
 
 ## Dependencies
@@ -26,5 +44,6 @@ Any version of the following libaries should be fine, but the code has been test
 - [x] Write proper instruction to run the above item.
 - [x] Add the scripts for the PDE with learned front and including the validation labels after the training.
 - [x] Write proper instrcution to run the above item.
-- [ ] Create a flag to run with no weights.
+- [x] Create a flag to run with no weights.
 - [ ] Put an extended version of the paper on arxiv.
+- [ ] Do an extra experiment for ogb-arxiv before conference
