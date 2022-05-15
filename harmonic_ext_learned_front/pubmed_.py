@@ -22,6 +22,7 @@ from new_utils import *
 parser = argparse.ArgumentParser()
 parser.add_argument("--rs", type=int, default=70, help="random_seed")
 parser.add_argument("--alpha1", type=float, default=0.664471086801786, help="alpha in dropout")
+parser.add_argument("--alpha2", type=float, default=0.664471086801786, help="alpha in dropout")
 parser.add_argument("--lr", type=float, default=0.0257755903020891)
 parser.add_argument("--rtol", type=float, default=0.00132319081706966, help="rtol in diffeq")
 parser.add_argument("--wd", type=float, default=0.00474882565951743)
