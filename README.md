@@ -1,5 +1,5 @@
 # Learning-Label-Initialization
-Source code for the paper "Learning Label Initialization for Time-Dependent Harmonic Extension" (IJCAI-2022). 
+Source code for the paper "Learning Label Initialization for Time-Dependent Harmonic Extension" (IJCAI-2022 oral). 
 Arixv:https://arxiv.org/pdf/2205.01358.pdf
 ![2](https://user-images.githubusercontent.com/38216671/167074954-ce00bba4-1838-45c2-b5ff-f590e2dfa99b.png)
 
